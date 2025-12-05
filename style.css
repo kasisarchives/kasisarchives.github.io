@@ -1,0 +1,742 @@
+/* --- VARIABLES & RESET --- */
+:root {
+    /* --- NOUVELLE PALETTE BTP & DURABLE --- */
+    --c-primary: #247B4D;      /* Vert profond (Titres, Fond Impact) */
+    --c-secondary: #E5D5B8;    /* Teal de liaison (Fond section Résultats) */
+    --c-bg: #E5D5B8;           /* Sable / Beige (Fond Hero, Pourquoi, Contact) */
+    --c-accent: #F9C74F;       /* Jaune chantier (Boutons, Badges) */
+    --c-text: #2F2F2F;         /* Gris béton foncé (Texte principal) */
+    --c-white: #F4F4F5;        /* Gris béton très clair (Fond de page, Cartes) */
+    
+    /* Système de design */
+    --radius-lg: 32px;
+    --radius-md: 16px;
+    --radius-sm: 8px;
+    --container-width: 1280px;
+    --spacing: 24px;
+    
+    /* Ombres ajustées au gris béton */
+    --shadow-soft: 0 10px 40px -10px rgba(47, 47, 47, 0.08);
+    --shadow-hover: 0 20px 60px -15px rgba(47, 47, 47, 0.12);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--c-white);
+    color: var(--c-text);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 { letter-spacing: -0.5px; font-weight: 700; color: var(--c-primary); } /* Titres en Vert Profond */
+img { max-width: 100%; display: block; object-fit: cover; }
+a { text-decoration: none; color: inherit; transition: 0.3s; }
+ul { list-style: none; }
+
+.container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 var(--spacing);
+}
+
+/* --- HEADER --- */
+header {
+    padding: 20px 0;
+    background-color: transparent;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    z-index: 10;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1360px;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--c-primary); /* Logo vert */
+}
+.logo .dot { color: var(--c-accent); }
+
+.capsule-menu {
+    background-color: var(--c-bg); /* Menu sur fond Sable */
+    padding: 12px 30px;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.capsule-menu ul { display: flex; gap: 30px; }
+.capsule-menu a { font-size: 0.95rem; font-weight: 600; color: var(--c-text); }
+.capsule-menu a:hover, .capsule-menu a.active { color: var(--c-primary); }
+
+.header-tools { display: flex; gap: 10px; }
+.icon-btn {
+    background: var(--c-bg);
+    border: none;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--c-text);
+}
+
+/* --- HERO SECTION --- */
+.hero-section {
+    padding-top: 140px;
+    padding-bottom: 80px;
+    /* Correction du dégradé : on retire le bleu cyan pour un gris/sable léger */
+    background: linear-gradient(135deg, var(--c-white) 0%, #ECE8E1 100%);
+    overflow: hidden;
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    margin-bottom: 24px;
+    color: var(--c-primary); /* Titre Hero en Vert */
+}
+
+.subtitle {
+    font-size: 1.125rem;
+    color: var(--c-text);
+    opacity: 0.8;
+    max-width: 480px;
+    margin-bottom: 40px;
+}
+
+.cta-group { display: flex; gap: 16px; }
+
+.btn {
+    padding: 16px 32px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.btn-primary {
+    background-color: var(--c-accent); /* Jaune Chantier */
+    color: var(--c-text); /* Texte gris foncé */
+    box-shadow: 0 4px 15px rgba(249, 199, 79, 0.4);
+}
+.btn-primary:hover { transform: translateY(-2px); }
+
+.btn-secondary {
+    background-color: var(--c-primary); /* Sable */
+    border: 2px solid var(--c-primary);
+    color: var(--c-white);
+}
+.btn-secondary:hover { filter: brightness(95%); }
+
+/* --- HERO VISUALS (Cartes) --- */
+.hero-visuals {
+    position: relative;
+    height: 600px;
+}
+
+.hero-card-main {
+    position: absolute;
+    top: 0; right: 0;
+    width: 90%;
+    background-color: var(--c-bg); /* Carte fond Sable */
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+    padding: 10px;
+}
+
+.hero-card-main img {
+    border-radius: calc(var(--radius-lg) - 5px);
+    width: 100%;
+    height: 350px;
+    /* Ajustement du filtre pour une teinte plus chaude/naturelle */
+    filter: sepia(20%) saturate(0.8); 
+}
+
+.tag-badge {
+    position: absolute;
+    top: 30px; left: 30px;
+    background-color: var(--c-accent); /* Jaune */
+    color: var(--c-text);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    z-index: 2;
+}
+
+.card-text { padding: 24px 15px 15px; }
+.card-text h3 { font-size: 1.25rem; margin-bottom: 5px; color: var(--c-primary); }
+.card-text p { color: var(--c-text); opacity: 0.8; font-size: 0.95rem; }
+
+.hero-card-small {
+    position: absolute;
+    bottom: 50px; left: 0;
+    width: 70%;
+    background-color: var(--c-white);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: var(--shadow-hover);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.hero-card-small h4 { font-size: 1.1rem; margin-bottom: 4px; color: var(--c-primary); }
+.hero-card-small p { font-size: 0.9rem; color: var(--c-text); opacity: 0.7; }
+
+.circle-arrow {
+    width: 48px; height: 48px;
+    background-color: var(--c-primary);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; /* Flèche blanche sur fond vert */
+}
+
+/* --- SECTION 2: POURQUOI --- */
+.why-section {
+    background-color: var(--c-bg); /* Fond Sable */
+    padding: 100px 0;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 60px;
+    color: var(--c-primary);
+}
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.feature-card {
+    text-align: left;
+    padding: 20px;
+}
+
+.icon-box {
+    font-size: 2.5rem;
+    color: var(--c-primary);
+    margin-bottom: 20px;
+}
+
+.feature-card h3 { font-size: 1.5rem; margin-bottom: 12px; }
+.feature-card p { color: var(--c-text); opacity: 0.85; line-height: 1.6; }
+
+/* --- SECTION 3: TECHNOLOGIE --- */
+.tech-section {
+    padding: 100px 0;
+    background-color: var(--c-white);
+}
+
+.grid-2-tech {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+}
+
+.schema-box {
+    background-color: #E8E8EA; /* Gris béton neutre au lieu du bleu */
+    border-radius: var(--radius-md);
+    padding: 40px;
+    position: relative;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    border: 1px solid #ddd;
+}
+
+/* Schéma minimaliste en CSS */
+.layer-wall {
+    height: 80px; background: #C5C5C5; /* Mur gris béton */
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 0 0 8px 8px; color: #555; font-weight: 600;
+}
+.layer-paint {
+    height: 40px; background: var(--c-primary); margin-bottom: 0;
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-size: 0.9rem; font-weight: 600;
+    position: relative;
+}
+/* Effet de reflet */
+.layer-paint::before {
+    content: ''; position: absolute; top: -100px; left: 50%;
+    width: 2px; height: 100px; background: linear-gradient(to top, var(--c-accent), transparent);
+    transform: rotate(-15deg);
+}
+.sun-rays {
+    position: absolute; top: 100px; width: 100%; text-align: center;
+    color: var(--c-accent); font-weight: 700;
+}
+
+.schema-caption { text-align: center; margin-top: 15px; font-size: 0.9rem; color: var(--c-text); opacity: 0.6; }
+
+.tech-list li { margin-bottom: 30px; }
+.tech-list h3 { font-size: 1.25rem; margin-bottom: 8px; color: var(--c-primary); }
+.tech-list p { color: var(--c-text); opacity: 0.8; }
+
+/* --- SECTION 4: RÉSULTATS --- */
+.results-section {
+    background-color: var(--c-secondary); /* Fond Teal */
+    padding: 80px 0;
+}
+
+.stats-grid { gap: 40px; }
+
+.stat-card {
+    background-color: var(--c-white);
+    padding: 40px 30px;
+    border-radius: var(--radius-md);
+    text-align: center;
+    box-shadow: var(--shadow-soft);
+}
+
+.big-number {
+    display: block;
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--c-primary);
+    margin-bottom: 10px;
+}
+.stat-card p { font-weight: 600; color: var(--c-text); }
+
+/* --- SECTION 5: PORTFOLIO --- */
+.portfolio-section { padding: 100px 0; background-color: var(--c-white); }
+
+.mosaic-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.project-item {
+    position: relative;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    height: 250px;
+    background-color: #ddd;
+}
+
+.project-item:nth-child(1) { grid-column: span 2; }
+
+.project-item img {
+    width: 100%; height: 100%;
+    transition: transform 0.5s ease;
+}
+.project-item:hover img { transform: scale(1.05); }
+
+.project-tag {
+    position: absolute;
+    bottom: 15px; left: 15px;
+    background-color: var(--c-accent);
+    color: var(--c-text);
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+/* --- SECTION 6: IMPACT --- */
+.impact-section {
+    background-color: var(--c-primary); /* Fond Vert Profond */
+    padding: 60px 0;
+    text-align: center;
+}
+
+.impact-section h2 { color: #fff; margin-bottom: 40px; } /* Titre blanc sur fond vert */
+
+.impact-list {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+.impact-item {
+    color: #fff; /* Texte blanc sur fond vert */
+    font-weight: 600;
+    font-size: 1.1rem;
+    display: flex; align-items: center; gap: 10px;
+}
+
+/* --- SECTION 7: CONTACT --- */
+.contact-section {
+    background-color: var(--c-bg); /* Fond Sable */
+    padding: 100px 0;
+}
+
+.grid-2-contact {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 60px;
+    background-color: var(--c-white);
+    padding: 60px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+}
+
+.form-block h3 { margin-bottom: 24px; color: var(--c-primary); }
+.form-block input, .form-block select, .form-block textarea {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: inherit;
+    background: #fff; /* Input blanc pour le contraste */
+    color: var(--c-text);
+}
+.btn-full { width: 100%; text-align: center; border: none; }
+
+.info-block { 
+    padding-left: 40px; 
+    border-left: 1px solid #ddd; 
+    display: flex; flex-direction: column; justify-content: center;
+}
+.response-badge {
+    display: inline-block;
+    background-color: var(--c-accent);
+    color: var(--c-text);
+    padding: 6px 12px;
+    font-size: 0.8rem; font-weight: 700;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    align-self: flex-start;
+}
+.info-block h4 { color: var(--c-primary); margin-bottom: 8px; }
+.info-block p { margin-bottom: 10px; color: var(--c-text); opacity: 0.8; }
+
+/* --- FOOTER --- */
+footer {
+    padding: 40px 0;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--c-text);
+    opacity: 0.7;
+    background: var(--c-white);
+    border-top: 1px solid #ddd;
+}
+
+/* --- RESPONSIVE BASIQUE --- */
+@media (max-width: 900px) {
+    .hero-grid, .grid-3, .grid-2-tech, .grid-2-contact { grid-template-columns: 1fr; }
+    .hero-visuals { display: none; }
+    .mosaic-grid { grid-template-columns: 1fr 1fr; }
+    .nav-container { flex-direction: column; gap: 15px; }
+    .capsule-menu { overflow-x: auto; max-width: 100%; }
+}
+
+/* =========================================
+   AJOUTS POUR SITE MULTI-PAGES
+   ========================================= */
+
+/* --- Header des sous-pages --- */
+/* On ajoute une classe 'sub-page' au body des nouvelles pages */
+body.sub-page header {
+    position: relative; /* Plus en absolute par dessus l'image */
+    background-color: var(--c-white);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+body.sub-page .capsule-menu {
+    background-color: rgba(0,0,0,0.03); /* Menu légèrement grisé pour le contraste */
+}
+
+/* --- Bandeau Titre des sous-pages --- */
+.page-header {
+    background-color: var(--c-bg); /* Couleur Sable #E5D5B8 */
+    padding: 80px 0 60px;
+    text-align: center;
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    margin-bottom: 60px;
+}
+
+.page-header h1 {
+    font-size: 3rem;
+    margin-bottom: 16px;
+    color: var(--c-primary);
+}
+
+.page-header p {
+    font-size: 1.25rem;
+    color: var(--c-text);
+    max-width: 700px;
+    margin: 0 auto;
+    opacity: 0.8;
+}
+
+/* --- Éléments spécifiques (Tableaux & FAQ) --- */
+/* Tableau de comparaison (Bénéfices) */
+.comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: var(--c-white);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+}
+.comparison-table th, .comparison-table td {
+    padding: 20px;
+    text-align: left;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+.comparison-table th {
+    background-color: var(--c-primary);
+    color: #fff;
+    font-weight: 600;
+}
+.comparison-table tr:last-child td { border-bottom: none; }
+
+/* FAQ Accordéons (Technologie) - 100% CSS (pas de JS) */
+details.faq-item {
+    background: var(--c-white);
+    margin-bottom: 15px;
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(0,0,0,0.05);
+    overflow: hidden;
+}
+details.faq-item summary {
+    padding: 20px;
+    cursor: pointer;
+    font-weight: 700;
+    list-style: none; /* Cache la flèche par défaut */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+details.faq-item summary::after { content: "+"; font-size: 1.5rem; color: var(--c-accent); }
+details[open].faq-item summary::after { content: "-"; }
+details.faq-item p { padding: 0 20px 20px; color: #555; line-height: 1.6; }
+
+/* =========================================
+   PAGE IMPACT - DESIGN MINIMALISTE
+   ========================================= */
+
+/* Zone principale qui prend presque tout l'écran */
+.impact-focus-zone {
+    min-height: 80vh; /* Occupe 80% de la hauteur d'écran */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--c-bg); /* Fond Sable/Ivoire */
+    text-align: center;
+    padding: 120px 20px 60px;
+}
+
+/* Conteneur plus étroit pour la lecture (évite les lignes trop longues) */
+.impact-container {
+    max-width: 900px !important;
+}
+
+/* 1. Typographie Hiérarchique */
+.impact-headline {
+    font-size: clamp(2.5rem, 5vw, 4.5rem); /* Taille adaptative très grande */
+    line-height: 1.1;
+    color: var(--c-primary); /* Vert profond */
+    margin-bottom: 30px;
+    font-weight: 800;
+}
+
+.highlight-text {
+    color: var(--c-text); /* Le texte important en gris foncé pour le contraste */
+    position: relative;
+    white-space: nowrap;
+}
+/* Petit soulignement subtil jaune */
+.highlight-text::after {
+    content: '';
+    position: absolute;
+    bottom: 5px; left: 0; right: 0;
+    height: 0.2em;
+    background-color: var(--c-accent); /* Jaune */
+    opacity: 0.4;
+    z-index: -1;
+    border-radius: 4px;
+}
+
+.impact-subtitle {
+    font-size: 1.25rem;
+    color: #555;
+    max-width: 600px;
+    margin: 0 auto 80px; /* Grand espace vide sous le texte */
+    line-height: 1.6;
+}
+
+/* 2. Indicateurs "Pure Data" (Pas de cartes) */
+.impact-metrics-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+    margin-bottom: 80px;
+}
+
+.metric-pure {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.metric-val {
+    font-size: 4rem;
+    font-weight: 800;
+    color: var(--c-primary);
+    line-height: 1;
+    letter-spacing: -2px;
+}
+
+.metric-val small {
+    font-size: 0.5em; /* L'unité (kg) plus petite */
+    font-weight: 600;
+    margin-left: -5px;
+}
+
+.metric-lbl {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    color: #777;
+}
+
+/* Séparateur vertical fin */
+.metric-separator {
+    width: 1px;
+    height: 60px;
+    background-color: rgba(0,0,0,0.1);
+}
+
+/* 3. Note de bas de page */
+.impact-footer-note {
+    font-size: 0.95rem;
+    color: var(--c-primary);
+    font-weight: 500;
+    opacity: 0.8;
+    border-top: 1px solid rgba(0,0,0,0.05);
+    display: inline-block;
+    padding-top: 20px;
+}
+
+/* Responsive Mobile */
+@media (max-width: 768px) {
+    .impact-metrics-row {
+        flex-direction: column;
+        gap: 40px;
+    }
+    .metric-separator {
+        width: 60px;
+        height: 1px; /* Devient horizontal sur mobile */
+    }
+    .impact-headline { font-size: 2.5rem; }
+}
+
+/* =========================================
+   CARROUSEL ECO-CONÇU (CSS SCROLL SNAP)
+   ========================================= */
+
+.eco-carousel-wrapper {
+    width: 100%;
+    margin-bottom: 60px;
+    position: relative;
+}
+
+.eco-carousel {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto; /* Active le scroll horizontal */
+    scroll-snap-type: x mandatory; /* Force l'arrêt sur les images */
+    padding-bottom: 20px;
+    
+    /* Masquer la barre de défilement (optionnel, pour l'esthétique) */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* IE/Edge */
+}
+.eco-carousel::-webkit-scrollbar { display: none; /* Chrome/Safari */ }
+
+.carousel-card {
+    /* Taille fixe pour forcer le défilement si nécessaire */
+    flex: 0 0 300px; 
+    height: 400px;
+    position: relative;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    scroll-snap-align: center; /* L'image se centre toute seule à l'arrêt */
+    background-color: #ddd; /* Placeholder couleur pendant le chargement */
+}
+
+.carousel-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.carousel-card:hover img {
+    transform: scale(1.05);
+}
+
+/* Texte sur l'image */
+.carousel-text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 30px 20px 20px;
+    /* Dégradé pour lisibilité du texte blanc sur n'importe quelle image */
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    color: white;
+    text-align: left;
+}
+
+.carousel-text h3 {
+    color: var(--c-accent); /* Jaune pour le titre */
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.carousel-text p {
+    font-size: 0.9rem;
+    color: #eee;
+    margin: 0;
+    font-weight: 500;
+}
+
+.scroll-hint {
+    font-size: 0.8rem;
+    color: #999;
+    letter-spacing: 1px;
+    margin-top: -10px;
+}
+
+/* Responsive Mobile */
+@media (max-width: 600px) {
+    .carousel-card {
+        flex: 0 0 85%; /* Sur mobile, on voit 85% de la carte pour inciter au scroll */
+        height: 350px;
+    }
+}
